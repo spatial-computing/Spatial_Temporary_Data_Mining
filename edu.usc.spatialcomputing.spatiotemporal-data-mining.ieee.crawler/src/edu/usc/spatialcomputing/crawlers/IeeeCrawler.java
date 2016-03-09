@@ -126,15 +126,15 @@ public class IeeeCrawler {
 		Map<String, String> parameters = new LinkedHashMap<String, String>();
 		// set parameters
 		parameters.put("querytext", "fuel cells".replaceAll(" ", "%20"));
-		parameters.put("pys", "2013"); // start of publication year
-		parameters.put("pye", "2014"); // end of publication year
+		parameters.put("pys", "2011"); // start of publication year
+		parameters.put("pye", "2012"); // end of publication year
 		parameters.put("pu", "IEEE"); // publication type "IEEE/AIP/IET/AVS/IBM"
 		parameters.put("ctype", "Conferences"); // content type
 												// "Conferences/Journals/Books/Early
 												// Access/Standards/Educational
 												// Courses"
 		// parameters.put("sortfield", "pys"); // Sort field
-		crawler.apiSearch("result/metadata/ts_13_14.json", parameters);
+		crawler.apiSearch("result/metadata/ts_11_12.json", parameters);
 
 	}
 
