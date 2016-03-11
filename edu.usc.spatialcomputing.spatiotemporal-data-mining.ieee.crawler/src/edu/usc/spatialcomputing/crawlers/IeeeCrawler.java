@@ -21,19 +21,19 @@ public class IeeeCrawler {
 		Thread.currentThread().sleep(1000);
 		Document doc = null;
 		System.out.println(url);
-		doc = Jsoup.connect(url).timeout(10 * 1000).get();
+		doc = Jsoup.connect(url).timeout(10 * 1000).ignoreContentType(true).get();
 		return doc;
 	}
 
 	private void apiSearch(String folder, Map<String, String> parameters) throws IOException, InterruptedException {
 
 		String searchUri = URL + mergeParameter(parameters);
-
 		// PrintWriter writer = new PrintWriter(folder, "UTF-8");
 
 		int count = 1;
 		// while(count <= 52){
 		Document webPage = retrieveDocumentFromUrl(searchUri);
+		System.out.println(webPage.toString());
 		List<IEEEArticle> articles = new ArrayList<IEEEArticle>();
 		String records = webPage.select("totalfound").get(0).text();
 		int totalRecords = Integer.valueOf(records);
@@ -126,6 +126,7 @@ public class IeeeCrawler {
 		Map<String, String> parameters = new LinkedHashMap<String, String>();
 		// set parameters
 		parameters.put("querytext", "fuel cells".replaceAll(" ", "%20"));
+
 		parameters.put("pys", "2011"); // start of publication year
 		parameters.put("pye", "2012"); // end of publication year
 		parameters.put("pu", "IEEE"); // publication type "IEEE/AIP/IET/AVS/IBM"
@@ -134,6 +135,7 @@ public class IeeeCrawler {
 												// Access/Standards/Educational
 												// Courses"
 		// parameters.put("sortfield", "pys"); // Sort field
+
 		crawler.apiSearch("result/metadata/ts_11_12.json", parameters);
 
 	}
